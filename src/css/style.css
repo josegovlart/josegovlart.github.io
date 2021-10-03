@@ -1,0 +1,42 @@
+* {
+    padding: 0;
+    margin: 0;
+    vertical-align: baseline;
+    list-style: none;
+    border: 0
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+}
+
+.object {
+    border: solid black 1px;
+    width: 50vw;
+    height: 50vh;
+    align-self: center;
+
+    border-radius: 100px 20px 50px 30px;
+}
+
+input {
+    width: 5vw;
+    height: 5vh;
+    text-align: center;
+    border: solid black 1px;
+    outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.radius-controllers {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
