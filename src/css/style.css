@@ -17,8 +17,6 @@ body {
     width: 50vw;
     height: 50vh;
     align-self: center;
-
-    border-radius: 100px 20px 50px 30px;
 }
 
 input {
