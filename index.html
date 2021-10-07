@@ -6,20 +6,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+    <script src="https://kit.fontawesome.com/120a8ed8fa.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src\css\style.css">
+    <link rel="stylesheet" href="src\css\style.scss">
 </head>
 
 <body>
-    <div class="radius-controllers">
-        <input type="number" name="" class="input-controller" id="tl">
-        <input type="number" name="" class="input-controller" id="bl">
+    <header>
+        <h1 class="title">Border-Radius Generator</h1>
+    </header>
+    <div class="content">
+        <div class="radius-controllers">
+            <input type="number" name="" class="input-controller" id="tl" value="0">
+            <input type="number" name="" class="input-controller" id="bl" value="0">
+        </div>
+        <div class="object">
+            <div class="copy-control" hidden>
+                <div id="code-snippet" class="code-snippet"></div>
+                <div data-clipboard-target="#code-snippet" class="copy-clipboard">
+                    <i class="fas fa-clone"></i>
+                </div>
+            </div>
+        </div>
+        <div class="radius-controllers">
+            <input type="number" name="" class="input-controller" id="tr" value="0">
+            <input type="number" name="" class="input-controller" id="br" value="0">
+        </div>
     </div>
-    <div class="object"></div>
-    <div class="radius-controllers">
-        <input type="number" name="" class="input-controller" id="tr">
-        <input type="number" name="" class="input-controller" id="br">
-    </div>
+    <footer>
+        Desenvolvido por José Goulart
+    </footer>
 </body>
 <script src="src\js\script.js"></script>
 

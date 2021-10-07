@@ -5,18 +5,67 @@
     list-style: none;
     border: 0
 }
+
 body {
+    font-family: 'Nunito', sans-serif;
     display: flex;
-    justify-content: center;
-    align-content: center;
+    flex-flow: column;
     height: 100vh;
 }
 
+header {
+    display: flex;
+    flex: 0 1 auto;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex: 1 1 auto;
+    column-gap: 15px;
+}
+
+footer {
+    align-self: center;
+    flex: 0 1 40px;
+}
+
 .object {
-    border: solid black 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid #758094 2px;
     width: 50vw;
     height: 50vh;
     align-self: center;
+    /* column-gap: 10px; */
+}
+
+.object>div.copy-control {
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    border: solid 2px #758094;
+    padding: .5rem;
+    column-gap: 15px;
+}
+
+.object>.copy-control>div.code-snippet {
+    font-size: 1.2rem;
+    vertical-align: middle;
+    font-weight: 600;
+}
+
+.object>.copy-control>div.copy-clipboard {
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 0px 20% 20% 0px;
+    text-align: center;
+    color: #000;
 }
 
 input {
@@ -25,12 +74,12 @@ input {
     text-align: center;
     border: solid black 1px;
     outline: none;
+    border-radius: 15%;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .radius-controllers {

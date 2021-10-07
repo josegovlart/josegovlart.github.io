@@ -1,9 +1,11 @@
-$(".input-controller").keydown(
-    function (e) {
+$(function () {
+    $(".copy-control").hide();
+    $(".input-controller").on("keydown change", function (e) {
         let input = $(this);
         let object = $(".object");
         let valor = input.val();
         let id = input.attr('id');
+        let keyCode = e.keyCode || e.which;
 
         if (id == 'tl') {
             object.css("border-top-left-radius", `${valor}%`);
@@ -17,15 +19,20 @@ $(".input-controller").keydown(
         if (id == 'bl') {
             object.css("border-bottom-left-radius", `${valor}%`);
         }
-        var keyCode = e.keyCode || e.which;
+
         if (keyCode == 9) {
             e.preventDefault();
-            // call custom function here
-            // console.table(input.next().attr('id'))
             let arr = input.closest('input').nextAll(':has(.input-controller):first').find('.input-controller');
             console.table(arr.prevObject);
-            
         }
+        $(".copy-control").show();
+        $(".code-snippet").text(getCssCode());
+    });
 
+    let getCssCode = () => {
+        let styles = "border-radius: " + $(".object").css("border-radius") + ";";
+        return styles;
     }
-);
+
+    var clipboard = new ClipboardJS('.copy-clipboard');
+});
