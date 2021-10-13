@@ -51,7 +51,7 @@ $(function () {
 
     let getRandomImage = () => {
         var keyword = "mountain";
-        $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+        $.getJSON("https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
             {
                 tags: keyword,
                 tagmode: "any",
