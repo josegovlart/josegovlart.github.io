@@ -39,6 +39,7 @@ $(function () {
     $("#checkbox-background-image").change(function () {
         if ($(this).prop('checked')) {
             getRandomImage();
+            $(this).css("background-size", "cover");
         } else {
             $('.object').css('background-image', 'none');
         }
@@ -62,7 +63,7 @@ $(function () {
 
                 var image_src = data.items[rnd]['media']['m'].replace("_m", "_b");
 
-                $(".object").css({ "background-image": "url('" + image_src + "')", "background-size": "cover" });
+                $(".object").css({ "background-image": "url('" + image_src + "')"});
 
             });
     }

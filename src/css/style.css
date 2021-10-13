@@ -15,9 +15,9 @@ body {
 
 header {
     display: flex;
-    flex: 0 1 auto;
+    flex: .2 1 auto;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     height: 80px;
 }
 
