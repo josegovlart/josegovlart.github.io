@@ -51,7 +51,7 @@ $(function () {
     }
 
     let getRandomImage = () => {
-        var keyword = "mountain";
+        var keyword = "favicon";
         $.getJSON("https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
             {
                 tags: keyword,
@@ -63,11 +63,24 @@ $(function () {
 
                 var image_src = data.items[rnd]['media']['m'].replace("_m", "_b");
 
-                $(".object").css({ "background-image": "url('" + image_src + "')"});
+                $(".object").css({ "background-image": "url('" + image_src + "')" });
+                $("link").prop('href', image_src);
 
             });
     }
 
+    let getRandomFavicon = () => {
+        $.getJSON('src/js/emojis.json', function (data) {
+            let count = 0;
+            for (let i in data) {
+                count = count + 1
+            }
+            let randomNumber = Math.floor(Math.random() * (count - 1));
+            $("#favicon").prop("href", "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>" + data[randomNumber].emoji + "</text></svg>");
+        });
+    }
+
+    getRandomFavicon();
 
     var clipboard = new ClipboardJS('.copy-clipboard');
 });
