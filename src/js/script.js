@@ -51,7 +51,7 @@ $(function () {
     }
 
     let getRandomImage = () => {
-        var keyword = "favicon";
+        var keyword = "mountain";
         $.getJSON("https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
             {
                 tags: keyword,
@@ -64,8 +64,6 @@ $(function () {
                 var image_src = data.items[rnd]['media']['m'].replace("_m", "_b");
 
                 $(".object").css({ "background-image": "url('" + image_src + "')" });
-                $("link").prop('href', image_src);
-
             });
     }
 
