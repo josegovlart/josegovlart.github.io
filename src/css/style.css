@@ -36,17 +36,20 @@ footer {
 
 .object {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border: solid #758094 2px;
     width: 50vw;
     height: 50vh;
     align-self: center;
+    row-gap: 15px;
     /* column-gap: 10px; */
 }
 
 .object>div.copy-control {
     display: flex;
+    background-color: #FFF;
     justify-content: center;
     border-radius: 5px;
     border: solid 2px #758094;
@@ -86,4 +89,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+.check-control {
+    background-color:#FFF;
+    border-radius: 5px;
+    padding: .5rem;
 }
