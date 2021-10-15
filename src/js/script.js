@@ -1,6 +1,6 @@
 $(function () {
     $(".copy-control").hide();
-    $(".input-controller").on("keydown change", function (e) {
+    $(".input-controller").on("keydown keypress", function (e) {
         let input = $(this);
         let object = $(".object");
         let valor = input.val();
@@ -14,7 +14,6 @@ $(function () {
             unit = 'px';
         }
 
-        console.log(unit);
         if (id == 'tl') {
             object.css("border-top-left-radius", `${valor + unit}`);
         }
@@ -34,7 +33,7 @@ $(function () {
             console.table(arr.prevObject);
         }
         $(".copy-control").show();
-        $(".code-snippet").text(getCssCode());
+        $(".code-snippet").html(getCssCode(arr));
     });
     $("#checkbox-background-image").change(function () {
         if ($(this).prop('checked')) {
@@ -44,10 +43,49 @@ $(function () {
             $('.object').css('background-image', 'none');
         }
     });
+    $(".radio-group").change(function () {
+        let tl = $("#tl");
+        let tr = $("#tr");
+        let br = $("#br");
+        let bl = $("#bl");
+        let object = $(".object");
 
-    let getCssCode = () => {
-        let styles = "border-radius: " + $(".object").css("border-radius") + ";";
-        return styles;
+        if ($(".form-check-input:checked").attr('id') == 'porcentage') {
+            unit = '%';
+        } else {
+            unit = 'px';
+        }
+
+        object.css("border-top-left-radius", `${tl.val() + unit}`);
+        object.css("border-top-right-radius", `${tr.val() + unit}`);
+        object.css("border-bottom-right-radius", `${br.val() + unit}`);
+        object.css("border-bottom-left-radius", `${bl.val() + unit}`);
+
+        $(".code-snippet").html(getCssCode());
+    });
+
+    let getCssCode = (arr) => {
+        let string = [];
+        let webkit = `-webkit-border-radius: ${$(".object").css("border-radius")};<br>`;
+        let gecko = `-moz-border-radius: ${$(".object").css("border-radius")};<br>`;
+        let css3 = `border-radius: ${$(".object").css("border-radius")};`;
+        arr.forEach(element => {
+            switch (element) {
+                case "webkit":
+                    string.push(webkit);
+                    break;
+                case "gecko":
+                    string.push(gecko);
+                    break;
+                case "css3":
+                    string.push(css3);
+                    break;
+
+                default:
+                    break;
+            }
+        });
+        return string;
     }
 
     let getRandomImage = () => {
