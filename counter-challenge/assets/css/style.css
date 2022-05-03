@@ -1,0 +1,45 @@
+html, body, div, h1 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+}
+
+.box-counter {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-counter>.box-header {
+    width: 200px;
+    height: 50px;
+    border-radius: 10px 10px 0px 0px;
+    background-color: #000;
+    color: #FFF;
+    font-weight: 600;
+    font-size: 12pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-counter>.box-content {
+    width: 200px;
+    height: 150px;
+    border-radius: 0px 0px 10px 10px;
+    background-color: #008000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 90pt;
+    color: #FFF;
+}
