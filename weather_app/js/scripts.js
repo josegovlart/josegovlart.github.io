@@ -33,7 +33,7 @@ $(function () {
 
     let getCurrentWeather = (localCode) => {
         $.ajax({
-            url: `http://dataservice.accuweather.com/currentconditions/v1/${localCode}?apikey=${ACCUWEATHER_API_KEY}&language=pt-br`,
+            url: `https://dataservice.accuweather.com/currentconditions/v1/${localCode}?apikey=${ACCUWEATHER_API_KEY}&language=pt-br`,
             type: 'GET',
             dataType: 'json',
             success: (data) => {
@@ -82,7 +82,7 @@ $(function () {
 
     let get5DaysWeatherForecast = (localCode) => {
         $.ajax({
-            url: `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${localCode}?apikey=${ACCUWEATHER_API_KEY}&language=pt-br&metric=true`,
+            url: `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${localCode}?apikey=${ACCUWEATHER_API_KEY}&language=pt-br&metric=true`,
             type: 'GET',
             dataType: 'json',
             success: (data) => {
@@ -147,7 +147,7 @@ $(function () {
 
     let getHourlyWeatherForecast = (localCode) => {
         $.ajax({
-            url: `http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${localCode}?apikey=${ACCUWEATHER_API_KEY}&language=pt-br&metric=true`,
+            url: `https://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${localCode}?apikey=${ACCUWEATHER_API_KEY}&language=pt-br&metric=true`,
             type: 'GET',
             dataType: 'json',
             success: (data) => {
@@ -177,7 +177,7 @@ $(function () {
 
     let getLocalCode = (lat, long) => {
         $.ajax({
-            url: `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${ACCUWEATHER_API_KEY}&q=${lat}%2C${long}&language=pt-br`,
+            url: `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${ACCUWEATHER_API_KEY}&q=${lat}%2C${long}&language=pt-br`,
             type: 'GET',
             dataType: 'json',
             success: (data) => {
@@ -204,22 +204,7 @@ $(function () {
     };
 
     let getIpCoordinates = () => {
-        $.ajax({
-            url: 'http://www.geoplugin.net/json.gp',
-            type: 'GET',
-            dataType: 'json',
-            success: (data) => {
-                if (data.geoplugin_latitude && data.geoplugin_longitude) {
-                    getLocalCode(data.geoplugin_latitude, data.geoplugin_longitude);
-                } else {
-                    getLocalCode(-30.003490914460244, -50.13064025039447);
-                }
-            },
-            error: () => {
-                getLocalCode(-27.5926317, -48.5287365);
-                console.log('Default city: Florianópolis');
-            }
-        });
+        getLocalCode(-27.5926317, -48.5287365);
     };
 
     let getSearchCoordinates = (input) => {
