@@ -216,7 +216,8 @@ $(function () {
                 }
             },
             error: () => {
-                console.log('Erro');
+                getLocalCode(-27.5926317, -48.5287365);
+                console.log('Default city: Florianópolis');
             }
         });
     };
