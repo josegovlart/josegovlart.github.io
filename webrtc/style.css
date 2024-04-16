@@ -1,0 +1,18 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+}
+
+button {
+  width: 50vw;
+  height: 10%;
+}
