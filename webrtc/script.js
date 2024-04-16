@@ -37,8 +37,9 @@ window.onload = () => {
   };
 
   getAvailableDevices();
-  
+
   document.getElementById('cam').addEventListener("click", () => allow(false, true));
   document.getElementById('mic').addEventListener("click", () => allow(true, false));
   document.getElementById('miccam').addEventListener("click", () => allow(true, true));
+  document.getElementById('refresh').addEventListener("click", () => window.location.reload());
 };
