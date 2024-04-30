@@ -5,8 +5,10 @@ window.onload = () => {
 
   const getAvailableDevices = () => {
     const deviceList = document.getElementById("device-list");
-    navigator.mediaDevices.enumerateDevices()
+    console.log('antes return');
+    return navigator.mediaDevices.enumerateDevices()
       .then((devices) => {
+        console.log('.then');
         devices.forEach((device) => {
           deviceList.innerHTML += `<li>${device.kind}: ${device.label} id = ${device.deviceId}</li>`;
           console.log(`${device.kind}: ${device.label} id = ${device.deviceId}`);
@@ -15,10 +17,62 @@ window.onload = () => {
       .catch((err) => {
         console.error(`${err.name}: ${err.message}`);
       });
+  };
+  
+  const handleSuccess = (stream) => {
+    const audioContext = new AudioContext();
+    const source = audioContext.createMediaStreamSource(stream);
+    const analyser = audioContext.createAnalyser();
+    const canvas = document.getElementById('waveformCanvas');
+    const ctx = canvas.getContext('2d');
 
+    source.connect(analyser);
+
+    // Set up the drawing parameters
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    // Draw the waveform
+    function draw() {
+        const WIDTH = canvas.width;
+        const HEIGHT = canvas.height;
+
+        analyser.getByteTimeDomainData(dataArray);
+
+        ctx.fillStyle = 'rgb(200, 200, 200)';
+        ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'rgb(0, 0, 0)';
+
+        ctx.beginPath();
+
+        const sliceWidth = WIDTH * 1.0 / bufferLength;
+        let x = 0;
+
+        for(let i = 0; i < bufferLength; i++) {
+            const v = dataArray[i] / 128.0;
+            const y = v * HEIGHT/2;
+
+            if(i === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+
+            x += sliceWidth;
+        }
+
+        ctx.lineTo(canvas.width, canvas.height/2);
+        ctx.stroke();
+
+        requestAnimationFrame(draw);
+    }
+
+    draw();
   };
 
-  const allow = (mic, cam) => {
+  const allow = async (mic, cam) => {
     if (!mic && !cam) return;
 
     if (mic && cam) {
@@ -28,59 +82,9 @@ window.onload = () => {
     } else if (cam) {
       console.log('Trying to use camera.');
     }
-
-    const handleSuccess = (stream) => {
-      const audioContext = new AudioContext();
-      const source = audioContext.createMediaStreamSource(stream);
-      const analyser = audioContext.createAnalyser();
-      const canvas = document.getElementById('waveformCanvas');
-      const ctx = canvas.getContext('2d');
-
-      source.connect(analyser);
-
-      // Set up the drawing parameters
-      const bufferLength = analyser.frequencyBinCount;
-      const dataArray = new Uint8Array(bufferLength);
-
-      // Draw the waveform
-      function draw() {
-          const WIDTH = canvas.width;
-          const HEIGHT = canvas.height;
-
-          analyser.getByteTimeDomainData(dataArray);
-
-          ctx.fillStyle = 'rgb(200, 200, 200)';
-          ctx.fillRect(0, 0, WIDTH, HEIGHT);
-
-          ctx.lineWidth = 2;
-          ctx.strokeStyle = 'rgb(0, 0, 0)';
-
-          ctx.beginPath();
-
-          const sliceWidth = WIDTH * 1.0 / bufferLength;
-          let x = 0;
-
-          for(let i = 0; i < bufferLength; i++) {
-              const v = dataArray[i] / 128.0;
-              const y = v * HEIGHT/2;
-
-              if(i === 0) {
-                  ctx.moveTo(x, y);
-              } else {
-                  ctx.lineTo(x, y);
-              }
-
-              x += sliceWidth;
-          }
-
-          ctx.lineTo(canvas.width, canvas.height/2);
-          ctx.stroke();
-
-          requestAnimationFrame(draw);
-      }
-
-      draw();
-    }
+    console.log('before await');
+    await getAvailableDevices();
+    console.log('after await');
 
     const constraints = { audio:mic, video: cam };
     navigator.mediaDevices.getUserMedia(constraints)
@@ -100,8 +104,6 @@ window.onload = () => {
         console.error(err);
       });
   };
-
-  getAvailableDevices();
 
   document.getElementById('cam').addEventListener("click", () => allow(false, true));
   document.getElementById('mic').addEventListener("click", () => allow(true, false));
